@@ -1,0 +1,93 @@
+/* ICON */
+.header-icon-menu {
+  display: inline-block;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #000000;
+  width: auto;
+  @include fontSize(24px);
+
+  &::before {
+    content: '\2261';
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 17px;
+    vertical-align: middle;
+    margin-top: -1px;
+  }
+
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: $menu-width;
+  transform: translateX($menu-width * -1);
+  transition: transform .3s;
+  background: #323a44;
+
+
+  a {
+    display: block;
+    text-align: center;
+    border-bottom: 1px solid #000;
+    color: #fff;
+    padding: 20px 0;
+
+  }
+  .active,
+  a:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  transition: transform .3s;
+}
+
+.with--sidebar {
+  .container {
+    transform: translateX($menu-width);
+  }
+  .menu { 
+    transform: translateX(0);
+  }
+}
+
+
+@media only screen and (min-width: $medium) {
+  .header-icon-menu {
+    display: none;
+  }
+
+  .menu {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    width: 100%;
+    transform: translateX(0);
+    background: none;
+
+    a {
+      display: block;
+      height: auto;
+      text-align: center;
+      line-height: 0;
+      border: none;
+      color: #000;
+      margin: 0 10px 0 10px;
+      text-decoration: none;
+
+      &:hover {
+        background: transparent;
+        text-decoration: underline;
+      }
+    }
+  }
+
+
+
+}
