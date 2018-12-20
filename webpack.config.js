@@ -136,7 +136,7 @@ const config = {
 
 // Env specific plugins
 if (dev) {
-  config.plugins.push(new BundleAnalyzerPlugin({openAnalyzer: false}))// default port 8888
+  config.plugins.push(new BundleAnalyzerPlugin({ openAnalyzer: false }))// default port 8888
 } else {
   config.plugins.push(new ManifestPlugin())
 }
