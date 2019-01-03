@@ -19,7 +19,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 // The brain
 const config = {
   entry: {
-    main: [`${assetPath}/css/main.scss`, `${assetPath}/js/main.js`]
+    main: [`${assetPath}/index.html`, `${assetPath}/css/main.scss`, `${assetPath}/js/main.js`]
   },
   mode: dev ? 'development' : 'production',
   // devtool: dev ? 'cheap-module-eval-source-map' : false,
@@ -39,7 +39,7 @@ const config = {
   output: {
     path: path.resolve(__dirname, outputPath),
     filename: '[name].js',
-    publicPath: dev ? `http://localhost:8080/` : '/'
+    publicPath: dev ? `http://localhost:8080/` : './'
   },
   resolve: {
     extensions: ['.jsx', '.js', '.ts', '.tsx'],
@@ -61,10 +61,19 @@ const config = {
         exclude: /node_modules/
       },
       {
+        test: /\.html$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: !dev
+          }
+        }]
+      },
+      {
         test: /\.scss$/,
         use: [
           {
-            loader: dev ? 'style-loader' : MiniCssExtractPlugin.loader,
+            loader: dev ? 'style-loader' : MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
@@ -96,7 +105,7 @@ const config = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif|svg|woff2?|eot|ttf|otf|wav)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf|wav)(\?.*)?$/,
         use: [{
           loader: 'file-loader',
           options: {
@@ -104,11 +113,23 @@ const config = {
             useRelativePath: !dev
           }
         }]
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8192,
+              name: `[name]${dev ? '' : '.[hash]'}.[ext]`
+            }
+          }
+        ]
       }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({inject: true, template: 'index.html'}),
+    new HtmlWebpackPlugin({ inject: true, template: 'src/index.html' }),
     new MiniCssExtractPlugin({
       filename: `[name]${!dev ? '' : '.[hash]'}.css`,
       chunkFilename: '[id].css'

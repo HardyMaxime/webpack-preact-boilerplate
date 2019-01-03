@@ -1,3 +1,3 @@
 import './responsiveMenu'
 
-console.log('bonjour')
+console.log('Bonjour')
