@@ -76,7 +76,7 @@ const config = {
         }]
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         use: [
           {
             loader: dev ? 'style-loader' : MiniCssExtractPlugin.loader
@@ -98,7 +98,8 @@ const config = {
                 require('css-mqpacker')({
                   sort: true
                 }),
-                require('cssnano')()
+                require('cssnano')(),
+                require('postcss-preset-env')()
               ]
             }
           },

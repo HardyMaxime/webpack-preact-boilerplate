@@ -1,1 +1,1 @@
-# webpack-boilerplate
+# webpack-preact-boilerplate
