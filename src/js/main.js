@@ -1,3 +1,7 @@
 import './responsiveMenu'
+import { h, render } from 'preact'
+import App from './components/App'
 
-console.log('Bonjour')
+render((
+   <App />
+), document.getElementById('app'))
